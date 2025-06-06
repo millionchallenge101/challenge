@@ -3,55 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>12x12 Local Image Grid</title>
+  <title>All Images</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      height: 100%;
-      background-color: black;
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background: #f9f9f9;
     }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, 12px);
-      grid-template-rows: repeat(auto-fill, 12px);
-      width: 100vw;
-      height: 100vh;
-    }
-
-    .cell img {
-      width: 12px;
-      height: 12px;
-      object-fit: cover;
-      display: block;
+    img {
+      max-width: 200px;
+      margin: 10px;
+      border: 1px solid #ccc;
     }
   </style>
 </head>
 <body>
-  <div class="grid" id="grid"></div>
+
+  <div id="image-container"></div>
 
   <script>
-    const grid = document.getElementById('grid');
-    const cols = Math.floor(window.innerWidth / 12);
-    const rows = Math.floor(window.innerHeight / 12);
-    const totalCells = cols * rows;
+    const totalImages = 9; // Change this to however many images you have
+    const imageContainer = document.getElementById("image-container");
 
-    // Assume you have images named img1.jpg to img500.jpg
-    const imageCount = 500;
-    const images = Array.from({ length: imageCount }, (_, i) => `images/img${i + 1}.jpg`);
-
-    for (let i = 0; i < totalCells; i++) {
-      const cell = document.createElement('div');
-      cell.className = 'cell';
-
-      const img = document.createElement('img');
-      img.src = images[i % imageCount]; // Loop through images if not enough
-
-      cell.appendChild(img);
-      grid.appendChild(cell);
+    for (let i = 1; i <= totalImages; i++) {
+      const img = document.createElement("img");
+      img.src = `images/image${i}.jpg`; // Change file type if needed
+      img.alt = `image${i}`;
+      img.onerror = function () {
+        img.remove(); // removes the image if it doesn't load
+      };
+      imageContainer.appendChild(img);
     }
   </script>
+
 </body>
 </html>

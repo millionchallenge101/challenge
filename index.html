@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>12x12 Local Image Grid</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background-color: black;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 12px);
+      grid-template-rows: repeat(auto-fill, 12px);
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .cell img {
+      width: 12px;
+      height: 12px;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid" id="grid"></div>
+
+  <script>
+    const grid = document.getElementById('grid');
+    const cols = Math.floor(window.innerWidth / 12);
+    const rows = Math.floor(window.innerHeight / 12);
+    const totalCells = cols * rows;
+
+    // Assume you have images named img1.jpg to img500.jpg
+    const imageCount = 500;
+    const images = Array.from({ length: imageCount }, (_, i) => `images/img${i + 1}.jpg`);
+
+    for (let i = 0; i < totalCells; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+
+      const img = document.createElement('img');
+      img.src = images[i % imageCount]; // Loop through images if not enough
+
+      cell.appendChild(img);
+      grid.appendChild(cell);
+    }
+  </script>
+</body>
+</html>

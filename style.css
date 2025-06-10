@@ -1,0 +1,12 @@
+body{
+    background-image: linear-gradient(rgb(255, 191, 53),rgb(255, 74, 74),rgb(60, 255, 0));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+#profile{
+    border-radius: 50%;
+    justify-content: center;
+}
